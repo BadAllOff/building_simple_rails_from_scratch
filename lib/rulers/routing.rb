@@ -3,6 +3,7 @@ module Rulers
   class Application
     def get_controller_and_action(env)
       # "_" something Iʼm ignoring or donʼt want.
+      # "after" what comes after cont and action name (e.q. params)
       _, cont, action, after =
           env["PATH_INFO"].split('/', 4)
       cont = cont.capitalize # "People"
