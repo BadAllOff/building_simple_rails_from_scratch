@@ -31,6 +31,19 @@ module Rulers
         files.map { |f| FileModel.new f }
       end
 
+      def self.save(id, obj)
+        File.open("db/quotes/#{id}.json", "w") do |f|
+          f.write <<TEMPLATE
+{
+"submitter": "#{obj["submitter"] || @hash["submitter"]}",
+"quote": "#{obj["quote"] || @hash["quote"]}",
+"attribution": "#{obj["attribution"] || @hash["attribution"]}"
+}
+TEMPLATE
+        end
+        FileModel.new "db/quotes/#{id}.json"
+      end
+
       def self.create(attrs)
         hash = {}
         hash["submitter"] = attrs["submitter"] || ""
